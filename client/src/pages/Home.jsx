@@ -1,7 +1,13 @@
+import { Container, Typography } from "@mui/material";
+import CreateOrUpdateUser from "../components/CreateOrUpdateUser";
+import UsersList from "../components/UsersList";
+
 const Home = () => {
   return (<>
-    <h1>Home</h1>
-  </>);
+    <Container>
+      <Typography variant="h6">Home</Typography>
+    </Container>
+  </>)
 };
- 
+
 export default Home;

@@ -1,55 +1,34 @@
-import { Alert, Button, Container, Stack, Typography } from '@mui/material';
-import { Formik,Form,Field,ErrorMessage } from 'formik';
-import { useNavigate } from 'react-router-dom';
-// import * as Yup from 'yup';
-import { useLogin } from '../context/loginContext';
+import { Alert, Button, Container, Paper, Stack, Typography } from '@mui/material';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import LoginForm from '../components/LoginForm';
+import { getToken } from '../helpers/getSessionInfo';
 
 const Login = () => {
-  const { loginHandler } = useLogin();
-
   const navigate = useNavigate();
 
-  return (<>
-    <Typography variant='h4'>Login</Typography>
-    <Container>
-      <Formik
-        initialValues={{
-          email:'',
-          password:''
-        }}
+  useEffect(() => {
+    if(getToken()){
+      navigate("/");
+    }
+  }, []);
 
-        // validationSchema={Yup.object().shape({
-        //   email:Yup.string().required("Email is required!"),
-        //   password:Yup.string().required("Password is required!")
-        // })}
-      
-        onSubmit={async (values)=>{
-          try{
-            const result  = await loginHandler(values);
-            if(result.data){
-              navigate("/home");
-            }else{
-              alert('User is not exist!!')
-            };
-          }catch(error){
-            console.log(error);
-          }
-        }}
-      >
-        {()=>(
-          <Form style={{padding:'0 8rem'}}>
-            <Stack gap={1}>
-              <Field style={{padding:"0.5rem 8px"}} name='email' type='email' placeholder='Set your email'/>
-              <ErrorMessage name="email" render={msg=><Alert severity="error">{msg}</Alert>}/>
-              <Field style={{padding:"0.5rem 8px"}} name='password' type='password' placeholder='Set your password'/>
-              <ErrorMessage name="password" render={msg=><Alert severity="error">{msg}</Alert>}/>
-              <Button variant="contained" type='submit'>Send</Button>
-            </Stack>
-          </Form>
-        )}
-      </Formik>
+  return (<>
+    <Container>
+      <Paper style={style} elevation={4}>
+        <Typography variant="h4" textAlign="center">Login</Typography>
+        <LoginForm />
+      </Paper>
     </Container>
-  </>);
+  </>)
 };
- 
+
+
+const style = {
+  margin:"4rem auto",
+  width:"32rem",
+  padding:"1rem"
+};
+
 export default Login;

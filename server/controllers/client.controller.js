@@ -1,9 +1,17 @@
 import { pool } from '../db.js';
+import jwt from "jsonwebtoken";
 
 export const getClientsRequest = async (req,res)=>{
   try{
+    // jwt.verify(req.token,process.env.SECRET_KEY,(err,authData)=>{
+    //   if(err){
+    //     throw new Error(err);
+    //   }
+    // });
+
     const [rows] = await pool.query("SELECT * FROM cliente ORDER BY id DESC");
     res.json(rows);
+
   }catch(error){
     return res.status(500).json({message:error.message});
   };

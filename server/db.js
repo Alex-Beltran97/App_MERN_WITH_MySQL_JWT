@@ -1,5 +1,6 @@
 import { createPool } from 'mysql2';
-import 'dotenv/config' 
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const pool = createPool({
   host:'localhost',
