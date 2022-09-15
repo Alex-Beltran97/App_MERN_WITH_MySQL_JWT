@@ -7,6 +7,7 @@ import { PORT } from "./config.js";
 import clientRoutes from './routes/client.routes.js';
 import loginRoutes from './routes/login.routes.js';
 import registerRoutes from './routes/register.routes.js';
+import salesRoutes from './routes/sales.routes.js';
 
 const app = express();
 
@@ -26,4 +27,5 @@ app.listen(PORT,()=>{
 app.use(clientRoutes);
 app.use(loginRoutes);
 app.use(registerRoutes);
+app.use(salesRoutes);
 

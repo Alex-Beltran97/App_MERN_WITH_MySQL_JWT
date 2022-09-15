@@ -27,6 +27,11 @@ const HeaderDrawer = () => {
             <Typography>Client</Typography>
           </ListItemButton>
         </ListItem>
+        <ListItem>
+          <ListItemButton href="/sale">
+            <Typography>Sale</Typography>
+          </ListItemButton>
+        </ListItem>
       </List>
     </Drawer>
   </>)
